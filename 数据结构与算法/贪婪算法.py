@@ -29,7 +29,7 @@ while states_needed:  # 当还有需要覆盖的州未被覆盖的时候循环
         # 如果交集的州数量比已经覆盖的州数量多
         if len(covered) > len(states_covered):
             best_station = station  # 最佳广播台更新为这个广播台
-            states_covered = covered # 已覆盖的州更新为交集
+            states_covered = covered  # 已覆盖的州更新为交集
     states_needed = states_needed - states_covered  # 更新为覆盖的州
     final_station.add(best_station)  # 更新最终结果
 
