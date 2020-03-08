@@ -26,15 +26,15 @@ class Rational:
         #  定义内部属性
         self.__num = sign * (num // g)
         self.__den = den // g
-    #  通过解析方法（解析函数），使得在类外部同样可以调用有理数的分子和分母
 
+    #  通过解析方法（解析函数），使得在类外部同样可以调用有理数的分子和分母
     def num(self):
         return self.__num
 
     def den(self):
         return self.__den
-    #  定义有理数基本计算方法
 
+    #  定义有理数基本计算方法
     def __add__(self, other):
         if not isinstance(other, Rational):
             raise TypeError
@@ -62,8 +62,8 @@ class Rational:
             raise ZeroDivisionError
         return Rational(self.__num * other.den(),
                         self.__den * other.num())
-    #  大小关系
 
+    #  大小关系
     def __eq__(self, other):
         if not isinstance(other, Rational):
             raise TypeError
