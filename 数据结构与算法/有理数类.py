@@ -69,10 +69,30 @@ class Rational:
             raise TypeError
         return self.__num * other.den() == self.__den * other.num()
 
+    def __ne__(self, other):
+        if not isinstance(other, Rational):
+            raise TypeError
+        return self.__num * other.den() != self.__den * other.num()
+
     def __lt__(self, other):
         if not isinstance(other, Rational):
             raise TypeError
         return self.__num * other.den() < self.__den * other.num()
+
+    def __le__(self, other):
+        if not isinstance(other, Rational):
+            raise TypeError
+        return self.__num * other.den() <= self.__den * other.num()
+
+    def __gt__(self, other):
+        if not isinstance(other, Rational):
+            raise TypeError
+        return self.__num * other.den() > self.__den * other.num()
+
+    def __ge__(self, other):
+        if not isinstance(other, Rational):
+            raise TypeError
+        return self.__num * other.den() >= self.__den * other.num()
 
     def __str__(self):
         return str(self.__num) + "/" + str(self.__den)
@@ -90,3 +110,6 @@ if __name__ == '__main__':
     y = five + x * Rational(5, 17)
     y.print()
     print(Rational(1, 2) == Rational(2, 3))
+    print(Rational(1, 2) >= Rational(2, 3))
+    print(Rational(1, 2) <= Rational(2, 3))
+    print(Rational(1, 2) != Rational(1, 2))
