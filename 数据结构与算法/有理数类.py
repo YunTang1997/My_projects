@@ -1,7 +1,7 @@
 class Rational:
     #  定义一个静态方法，求解最大公约数
     @staticmethod
-    def __gcd(m, n):
+    def _gcd(m, n):
         if n == 0:
             m, n = n, m
         while m != 0:
@@ -22,83 +22,83 @@ class Rational:
             num, sign = -num, -sign
         if den < 0:
             den, sign = -den, -sign
-        g = Rational.__gcd(num, den)
+        g = Rational._gcd(num, den)
         #  定义内部属性
-        self.__num = sign * (num // g)
-        self.__den = den // g
+        self._num = sign * (num // g)
+        self._den = den // g
 
     #  通过解析方法（解析函数），使得在类外部同样可以调用有理数的分子和分母
     def num(self):
-        return self.__num
+        return self._num
 
     def den(self):
-        return self.__den
+        return self._den
 
     #  定义有理数基本计算方法
     def __add__(self, other):
         if not isinstance(other, Rational):
             raise TypeError
-        num = self.__num * other.den() + self.__den * other.num()
-        den = self.__den * other.den()
+        num = self._num * other.den() + self._den * other.num()
+        den = self._den * other.den()
         return Rational(num, den)
 
     def __sub__(self, other):
         if not isinstance(oyher, Rational):
             raise TypeError
-        num = self.__num * other.den() - self.__den * other.num()
-        den = self.__den * other.den()
+        num = self._num * other.den() - self._den * other.num()
+        den = self._den * other.den()
         return Rational(num, den)
 
     def __mul__(self, other):
         if not isinstance(other, Rational):
             raise TypeError
-        return Rational(self.__num * other.num(),
-                        self.__den * other.den())
+        return Rational(self._num * other.num(),
+                        self._den * other.den())
 
     def __floordiv__(self, other):
         if not isinstance(other, Rational):
             raise TypeError
         if other.num() == 0:
             raise ZeroDivisionError
-        return Rational(self.__num * other.den(),
-                        self.__den * other.num())
+        return Rational(self._num * other.den(),
+                        self._den * other.num())
 
     #  大小关系
     def __eq__(self, other):
         if not isinstance(other, Rational):
             raise TypeError
-        return self.__num * other.den() == self.__den * other.num()
+        return self._num * other.den() == self._den * other.num()
 
     def __ne__(self, other):
         if not isinstance(other, Rational):
             raise TypeError
-        return self.__num * other.den() != self.__den * other.num()
+        return self._num * other.den() != self._den * other.num()
 
     def __lt__(self, other):
         if not isinstance(other, Rational):
             raise TypeError
-        return self.__num * other.den() < self.__den * other.num()
+        return self._num * other.den() < self._den * other.num()
 
     def __le__(self, other):
         if not isinstance(other, Rational):
             raise TypeError
-        return self.__num * other.den() <= self.__den * other.num()
+        return self._num * other.den() <= self._den * other.num()
 
     def __gt__(self, other):
         if not isinstance(other, Rational):
             raise TypeError
-        return self.__num * other.den() > self.__den * other.num()
+        return self._num * other.den() > self._den * other.num()
 
     def __ge__(self, other):
         if not isinstance(other, Rational):
             raise TypeError
-        return self.__num * other.den() >= self.__den * other.num()
+        return self._num * other.den() >= self._den * other.num()
 
     def __str__(self):
-        return str(self.__num) + "/" + str(self.__den)
+        return str(self._num) + "/" + str(self._den)
 
     def print(self):
-        print(self.__num, "/", self.__den)
+        print(self._num, "/", self._den)
 
 
 if __name__ == '__main__':
