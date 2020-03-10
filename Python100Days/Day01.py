@@ -1,5 +1,5 @@
 """
-用python的turtle模块绘制国旗、小猪佩奇
+用python的turtle模块绘制国旗
 """
 import turtle
 
