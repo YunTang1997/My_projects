@@ -18,8 +18,6 @@ class PersonValueError(ValueError):
     pass
 
 # 公共人员类的实现
-
-
 class Person(object):
     _num = 0
 
