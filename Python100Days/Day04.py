@@ -32,7 +32,7 @@ row = int(input("\n请输入行数："))
 for i in range(row):
     for _ in range(0, i + 1):
         print("*", end = " ")
-    print()
+    print()  # 换行，print默认是打印一行，结尾加换行
 print("--------------------------")
 # 画右下三角
 for i in range(row):
@@ -41,7 +41,7 @@ for i in range(row):
             print(" ", end = " ")
         else:
             print("*", end = " ")
-    print()
+    print()  # 换行，print默认是打印一行，结尾加换行
 print("--------------------------")
 # 画正三角
 for i in range(row):
@@ -49,7 +49,7 @@ for i in range(row):
         print(" ", end = " ")
     for _ in range(2 * i + 1):
         print("*", end = " ")
-    print()
+    print()  # 换行，print默认是打印一行，结尾加换行
 
 
 # 求解最大公因数和最小公倍数
