@@ -29,7 +29,7 @@ def random_select():
     :return: 随机选择一组号码
     """
     red_balls = [x for x in range(1, 34)]
-    selected_balls = []  # 选完一轮号码，将    selected_balls = []  # 选完一轮号码，将selected_balls清空
+    selected_balls = []  # 选完一轮号码，将selected_balls清空
     # 使用random模块的sample函数来实现从列表中选择不重复的n个元素
     selected_balls = sample(red_balls, 6)
     selected_balls.sort()
