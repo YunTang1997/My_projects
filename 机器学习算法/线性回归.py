@@ -72,7 +72,7 @@ def gradientDescent(X, y, theta, alpha, num_iters):
     m = len(y)
     n = len(theta)
 
-    temp = np.matrix(np.zeros((n, num_iters)))  # 暂存每次迭代计算的theta，转化为矩阵形式
+    temp = np.asmatrix(np.zeros((n, num_iters)))  # 暂存每次迭代计算的theta，转化为矩阵形式
 
     J_history = np.zeros((num_iters, 1))  # 记录每次迭代计算的代价值
 
