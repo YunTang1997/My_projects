@@ -52,6 +52,3 @@ if __name__ == '__main__':
     print(check_parens(test2))
     test3 = "([{}])"
     print(check_parens(test3))
-
-
-
