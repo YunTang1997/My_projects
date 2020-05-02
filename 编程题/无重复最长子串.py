@@ -7,6 +7,10 @@ date: 2020/4/27
 desc: 利用移动窗口和哈希表（字典）解决无重复最长子串的问题
 """
 
+
+from timeit import timeit
+
+# 方法一
 class Solution:
     def lengthOfLongestSubstring(self, s):
         s_len = len(s)
@@ -32,5 +36,26 @@ class Solution:
 
 
 print(Solution().lengthOfLongestSubstring("abba"))
+print(timeit("Solution().lengthOfLongestSubstring('abba')", globals=globals(), number=1000))
+
+
+# 方法二
+def lengthOfLongestSubstring(s):
+    n = len(s)
+    occ = set()
+    ans, j = 0, -1
+
+    for i in range(n):
+        if i != 0:
+            occ.remove(s[i - 1])
+        while (j + 1) < n and s[j + 1] not in occ:
+            occ.add(s[j + 1])
+            j += 1
+        ans = max(ans, j - i + 1)
+
+    return ans
+
+print(lengthOfLongestSubstring("abba"))
+print(timeit("lengthOfLongestSubstring('abba')", globals=globals(), number=1000))
 
 
