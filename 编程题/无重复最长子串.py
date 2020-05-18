@@ -46,7 +46,7 @@ def lengthOfLongestSubstring(s):
     ans, j = 0, -1
 
     for i in range(n):
-        if i != 0:
+        if i != 0:  # i不为0说明滑动窗口起点向右移动了，则需要删除set中处于滑动窗口左侧的元素
             occ.remove(s[i - 1])
         while (j + 1) < n and s[j + 1] not in occ:
             occ.add(s[j + 1])
