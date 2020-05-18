@@ -29,7 +29,7 @@ class Solution:
             for c in range(1, amount + 1):
                 dp[r][c] = dp[r - 1][c]  # 不选当前指标r对应的硬币
                 if c >= coins[r - 1]:
-                    dp[r][c] += dp[r][c - coins[r - 1]]  # 选当前指标r对应的硬币
+                    dp[r][c] += dp[r][c - coins[r - 1]]  # 选当前指标r对应的硬币，注意等号后面的dp[r][[c]为dp[r - 1][c]
         return dp[-1][-1]
 
 print(Solution().waysToChange(5))
