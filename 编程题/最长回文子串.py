@@ -52,7 +52,7 @@ def __center_spread(s, n, left, right):
 
 def longestPalindrome_2(s):
     n = len(s)
-    if n <= 2:
+    if n < 2:
         return s
 
     max_len, res = 1, s[0]

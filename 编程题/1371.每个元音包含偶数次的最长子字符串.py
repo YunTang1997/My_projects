@@ -15,7 +15,7 @@ def findTheLongestSubstring(s):
     """
     n = len(s)
     bin_reocord = [-float('inf')] * (1 << 5)  # 储存'aeiou'五个元音字符在子串中的奇偶情况，'00000'(0)~'11111'(31)总共32种状态
-    bin_reocord[0] = -1  # 处理边界情况，方便计算子串的长度
+    bin_reocord[0] = -1  # 处理边界情况，方便计算子串的长度（相当于将五个元音字符均出现0次的状态，定义为下标-1）
     res, status = 0, 0
     for i in range(n):
         #  注意异或运算符的应用
