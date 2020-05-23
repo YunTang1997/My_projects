@@ -9,10 +9,11 @@ desc: 利用移动窗口和哈希表（字典）解决无重复最长子串的�
 
 
 from timeit import timeit
+from collections import defaultdict
 
 # 方法一
 class Solution:
-    def lengthOfLongestSubstring(self, s):
+    def lengthOfLongestSubstring_1(self, s):
         s_len = len(s)
         s_dict = {}
         for key, elem in enumerate(s):  # 将原字符串转化为索引：元素的字典，方便后面元素访问
@@ -35,12 +36,8 @@ class Solution:
         return ans
 
 
-print(Solution().lengthOfLongestSubstring("abba"))
-print(timeit("Solution().lengthOfLongestSubstring('abba')", globals=globals(), number=1000))
-
-
 # 方法二
-def lengthOfLongestSubstring(s):
+def lengthOfLongestSubstring_2(s):
     n = len(s)
     occ = set()
     ans, j = 0, -1
@@ -52,10 +49,40 @@ def lengthOfLongestSubstring(s):
             occ.add(s[j + 1])
             j += 1
         ans = max(ans, j - i + 1)
-
     return ans
 
-print(lengthOfLongestSubstring("abba"))
-print(timeit("lengthOfLongestSubstring('abba')", globals=globals(), number=1000))
+
+# 方法三
+def lengthOfLongestSubstring_3(s):
+    n = len(s)
+    lookup = defaultdict(int)
+    left, right = 0, 0
+    max_len = 0
+    count = 0  # count=0代表没有元素重复
+    while right < n:
+        if lookup[s[right]] > 0:
+            count += 1  # count=1代表有元素重复
+        lookup[s[right]] += 1
+        right += 1
+        while count > 0:
+            if right - left - 1 > max_len:
+                max_len = right - left
+            if lookup[s[left]] > 1:  # 若s[left]是重复的元素
+                count -= 1
+            lookup[s[left]] -= 1
+            left += 1
+    return max_len
+
+
+if __name__ == '__main__':
+    print(Solution().lengthOfLongestSubstring_1("pwwkew"))
+    print(timeit("Solution().lengthOfLongestSubstring_1('pwwkew')", globals=globals(), number=1000))
+    print(lengthOfLongestSubstring_2("pwwkew"))
+    print(timeit("lengthOfLongestSubstring_2('pwwkew')", globals=globals(), number=1000))
+    print(lengthOfLongestSubstring_3("pwwkew"))
+    print(timeit("lengthOfLongestSubstring_3('pwwkew')", globals=globals(), number=1000))
+
+
+
 
 
