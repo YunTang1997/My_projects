@@ -11,6 +11,7 @@ desc: 字符串解码
 import re
 
 
+# 方法一
 def decodeString_1(s):
     stack = []   # (str, int) 记录之前的字符串和括号外的上一个数字
     num, res = 0, ''
@@ -28,7 +29,7 @@ def decodeString_1(s):
     return res
 
 
-
+# 方法二
 def decodeString_2(s):
     stack1 = []  # 储存数字字符和-1，每次遇到'['，就向stack1中存入-1用于给数字字符分层
     stack2 = []  # 储存'['和字母字符，其中'['用于分层
@@ -55,6 +56,7 @@ def decodeString_2(s):
     return ''.join(stack2)  # 将stack2中的所有字符串拼接，得到答案
 
 
+# 方法三
 def decodeString_3(s):
     regex = re.compile(r'(\d+)\[(\w+)\]')
     match = regex.findall(s)  # 返回一个表，表中元素是按顺序给出的皮匹配得到的各个子串（从左到右，非重叠）
