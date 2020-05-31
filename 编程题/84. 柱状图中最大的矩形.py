@@ -30,44 +30,46 @@ def largestRectangleArea_1(heights):
 # 方法二（单调栈）
 def largestRectangleArea_2(heights):
     n = len(heights)
-    stack = []
+    stack = []  # 利用列表创建一个栈
     res = 0
     for i in range(n):
-        while len(stack) > 0 and heights[i] < heights[stack[-1]]:
+        while len(stack) > 0 and heights[i] < heights[stack[-1]]:  # 只有当stack非空且heights[i] < height[stack[-1]]时出栈
             cur_height = heights[stack.pop()]
-            while len(stack) > 0 and heights[stack[-1]] == cur_height:
+            while len(stack) > 0 and heights[stack[-1]] == cur_height:  # 相同的柱子高度，直接出栈
                 stack.pop()
+            # 跳出前一个while循环，说明向在stack中向左扩散找到第一个柱子高度严格小于cur_height的下标，并计算出组合矩形的最大宽度
             if len(stack) > 0:
-                cur_max_weight = i - stack[-1] - 1
+                cur_max_width = i - stack[-1] - 1
             else:
-                cur_max_weight = i
-            res = max(res, cur_max_weight * cur_height)
-        stack.append(i)
-    while len(stack) > 0:
+                cur_max_width = i
+            res = max(res, cur_max_width * cur_height)
+        stack.append(i)  # 当heights[i] >= height[stack[-1]]时入栈，所以stack也称为单调栈，因为其中元素所对应的柱子高度呈不减趋势
+    while len(stack) > 0:  # 跳出第一个while循环，若stack非空，说明还有未处理的柱子高度
         cur_height = heights[stack.pop()]
         while len(stack) > 0 and heights[stack[-1]] == cur_height:
             stack.pop()
         if len(stack) > 0:
-            cur_max_weight = n - stack[-1] - 1
+            cur_max_width = n - stack[-1] - 1  # 注意n为heights的长度
         else:
-            cur_max_weight = n
-        res = max(res, cur_max_weight * cur_height)
+            cur_max_width = n
+        res = max(res, cur_max_width * cur_height)
     return res
 
 
 # 方法三（单调栈+哨兵）：
 def largestRectangleArea_3(heights):
+    # 在原本heights的基础上，添加前后两个高度为0的柱子（哨兵），第一个0保证原本heights中的元素全部入栈，而后一个0保证stack中的元素全部出栈
     heights = [0] + heights + [0]
     n = len(heights)
     stack = [0]
     res = 0
-    for i in range(1, n):
+    for i in range(1, n):  # 由于加入了哨兵，所以从1开始
         while heights[i] < heights[stack[-1]]:
             cur_height = heights[stack.pop()]
-            while heights[-1] == cur_height:
+            while heights[-1] == cur_height:  # 相同的柱子高度，直接出栈
                 stack.pop()
-            cur_max_weight = i - stack[-1] - 1
-            res = max(res, cur_max_weight * cur_height)
+            cur_max_width = i - stack[-1] - 1
+            res = max(res, cur_max_width * cur_height)
         stack.append(i)
     return res
 
