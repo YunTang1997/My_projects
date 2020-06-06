@@ -86,11 +86,7 @@ if __name__ == '__main__':
 
     print(binary_search_2(alist, 55, 0, len(alist) - 1))
     print(binary_search_2(alist, 1000, 0, len(alist) - 1))
-    print(
-        timeit(
-            "binary_search_2(alist, 55, 0, len(alist) - 1)",
-            globals=globals(),
-            number=1000))
+    print(timeit("binary_search_2(alist, 55, 0, len(alist) - 1)", globals=globals(), number=1000))
 
     print(binary_search_3(alist, 55))
     print(binary_search_3(alist, 1000))
