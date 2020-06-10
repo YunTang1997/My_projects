@@ -20,8 +20,8 @@ def translateNum(num):
     # dp[i]表示num前i个元素组成的数字有几种组合方式
     dp = [1 for _ in range(n + 1)]
     for i in range(2, n + 1):
-        if int(num_str[i - 2] + num_str[i - 1]) <= 25:
-            dp[i] = dp[i - 1] + dp[i - 2]
+        if 10 <= int(num_str[i - 2] + num_str[i - 1]) <= 25:  # 当倒数两个数能组成[10, 25]之间的数字时，注意要大于等于10
+            dp[i] = dp[i - 1] + dp[i - 2]  # dp[i]由dp[i-1]和dp[i-2]转移得到
         else:
             dp[i] = dp[i - 1]
     return dp[-1]
@@ -31,6 +31,7 @@ if __name__ == '__main__':
     print(translateNum(12258))
     print(translateNum(1))
     print(translateNum(122))
+    print(translateNum(2047483648))
 
 
 
