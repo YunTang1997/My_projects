@@ -8,7 +8,7 @@
 			primary key：主键，用于保证该字段的值具有唯一性，并且非空，比如：学号、员工编号等
 			unique：唯一，用于保证该字段的值具有唯一性，可以为空，比如：座位号
 			check：检查约束[mysql中不支持]
-			poreign key：外键，用于限制两个表的关系，用于保证该字段的值必须来自于主表的关联列的值
+			foreign key：外键，用于限制两个表的关系，用于保证该字段的值必须来自于主表的关联列的值
 										在从表添加外键约束，用于引用主表中某些列的值
 
 添加约束的时机：
@@ -105,3 +105,70 @@ CREATE TABLE stuinfo (
 	majorid INT,
 	CONSTRAINT fk_stuinofo_major FOREIGN KEY ( majorid ) REFERENCES major ( id ) 
 );
+
+
+-- 二、修改表时添加约束
+/*
+1、添加列级约束（语法）不支持约束名：
+alter table 表名 modify columns 字段名 字段类型 新约束;
+2、添加表级约束（语法）支持约束名：
+alter table 表名 add [constraint 约束名] 约束类型(字段名) [外键引用];
+*/
+DROP TABLE IF EXISTS stuinfo;
+CREATE TABLE stuinfo(
+	id INT,
+	stuname VARCHAR(20),
+	gender CHAR(1),
+	seat INT,
+	age INT,
+	majorid INT
+);
+DESC stuinfo;
+
+-- 1、添加非空约束
+ALTER TABLE stuinfo MODIFY COLUMN stuname VARCHAR ( 20 ) NOT NULL;
+DESC stuinfo;
+
+-- 2、添加默认约束
+ALTER TABLE stuinfo MODIFY COLUMN age INT DEFAULT 18;
+DESC stuinfo;
+
+-- 3、添加主键
+-- 列级约束
+ALTER TABLE stuinfo MODIFY COLUMN id INT PRIMARY KEY;
+DESC stuinfo;
+-- 表级约束
+ALTER TABLE stuinfo ADD PRIMARY KEY ( id );
+
+-- 4、唯一键
+-- 列级约束
+ALTER TABLE stuinfo MODIFY COLUMN seat INT UNIQUE;
+DESC stuinfo;
+-- 表级约束
+ALTER TABLE stuinfo ADD UNIQUE ( seat );
+
+-- 5、添加外键
+-- 仅仅支持表级约束
+ALTER TABLE stuinfo ADD FOREIGN KEY ( majorid ) REFERENCES major ( id );
+
+
+-- 三、修改表时删除约束
+-- 1、删除非空约束
+ALTER TABLE stuinfo MODIFY COLUMN stuname VARCHAR ( 20 ) NULL;
+
+-- 2、删除默认约束
+ALTER TABLE stuinfo MODIFY COLUMN age INT;
+
+-- 3、删除主键
+ALTER TABLE stuinfo DROP PRIMARY KEY;
+
+-- 4、删除唯一
+ALTER TABLE stuinfo FROM INDEX seat;
+
+-- 5、删除外键约束
+ALTER TABLE stuinfo DROP FOREIGN KEY majorid;
+
+
+
+
+
