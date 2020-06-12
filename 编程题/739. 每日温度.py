@@ -30,16 +30,24 @@ def dailyTemperatures_2(T):
     n, dim_stack = len(T), []
     res = [0 for _ in range(n)]  # 初始化结果全部为0
     for index, value in enumerate(T):
-        if not dim_stack:  # 将（0，T[0]）压入栈
-            dim_stack.append((index, value))
-            continue
-        elif value > dim_stack[-1][1]:  # 若当前value>栈顶value
-            while dim_stack and value > dim_stack[-1][1]:  # 循环直至栈顶value>=当前value
-                tmp = dim_stack.pop()  # 弹出栈顶元素
-                res[tmp[0]] = index - tmp[0]  # 在res对应位置更新结果
-            dim_stack.append((index, value))  # 跳出while循环并将当前（index，value）压入栈
-        else:  # 若当前value<=栈顶value
-            dim_stack.append((index, value))
+        while dim_stack and value > dim_stack[-1][1]:  # 循环直至栈顶value>=当前value
+            tmp = dim_stack.pop()  # 弹出栈顶元素
+            res[tmp[0]] = index - tmp[0]  # 在res对应位置更新结果
+        dim_stack.append((index, value))
+    return res
+
+
+def dailyTemperatures_3(T):
+    n, dim_stack = len(T), []
+    res = [0 for _ in range(n)]
+    for i in range(n - 1, -1, -1):
+        while dim_stack and T[i] >= T[dim_stack[-1]]:  # 注意此处第二个条件要取=
+            dim_stack.pop()  # 弹出对应值<=当前下标对应值的下标
+        if dim_stack: # 如果栈非空，说明T[i]右边第一个比它更大的元素是T[dim_stack[-1]]
+            res[i] = dim_stack[-1] - i
+        else:  # 如果栈空，说明T[i]右边没有比它更大的元素
+            res[i] = 0
+        dim_stack.append(i)
     return res
 
 
@@ -48,3 +56,5 @@ if __name__ == '__main__':
     print(dailyTemperatures_1([55, 38, 53, 81, 61, 93, 97, 32, 43, 78]))
     print(dailyTemperatures_2([73, 74, 75, 71, 69, 72, 76, 73]))
     print(dailyTemperatures_2([55, 38, 53, 81, 61, 93, 97, 32, 43, 78]))
+    print(dailyTemperatures_3([73, 74, 75, 71, 69, 72, 76, 73]))
+    print(dailyTemperatures_3([55, 38, 53, 81, 61, 93, 97, 32, 43, 78]))
