@@ -8,14 +8,26 @@ desc: 给定一个包含n个整数的数组nums和一个目标值target，判断
 """
 
 
+# 注意和15.三数之和做对比
+
+
 def fourSum(nums, target):
-    nums.sort()
+    nums.sort()  # 将原来数组从小到大排序
     n = len(nums)
     res = []
-    for i in range(n - 3):
-        if i > 0 and nums[i - 1] == nums[i]:
+    for i in range(n - 3):  # 注意最大只能取到n - 4
+        '''
+        if nums[i] > 0:  # 目标值target可能为负，因此不能使用该判断语句优化代码
+            break
+        '''
+        if i > 0 and nums[i - 1] == nums[i]:  # 跳过相同的结果集
             continue
-        for j in range(i + 1, n - 2):
+        '''以下部分和15.三数之和代码基本一致'''
+        for j in range(i + 1, n - 2):  # 注意取值范围
+            '''
+            if nums[j] > 0:  # 目标值target可能为负，因此不能使用该判断语句优化代码
+                break
+            '''
             if j > i + 1 and nums[j - 1] == nums[j]:
                 continue
             left, right = j + 1, n - 1
