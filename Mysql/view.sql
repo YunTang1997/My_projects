@@ -162,9 +162,9 @@ show create view myv3;（cmd中结果比较全）
 
 -- 五、视图的更新
 /*
-1、更新语法：update form [视图名 where 筛选语句];
+1、更新语法：update 视图名 set 列=值 where 筛选语句;
 2、插入语法：insert into 视图名[(字段名)] values();
-3、删除语法：delete from [视图名 where 筛选语句];
+3、删除语法：delete from 视图名 where 筛选语句;
 
 注意：通过以上语句对视图修改，也会修改原表，所以一般会给视图增加只读权限
 

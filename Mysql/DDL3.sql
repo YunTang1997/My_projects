@@ -31,7 +31,15 @@
 			1、要求在从表设置外键关系
 			2、从表的外键列的类型和主表的关联列的类型要求一致或兼容
 			3、主表的关联列必须是一个key（一般是主键或唯一键）
-			4、插入数据时，先插入主表，再插入从表；删除数据时，先删除从表，在删除主表
+			4、插入数据时，先插入主表，再插入从表；删除数据时，先删除从表，再删除主表
+
+
+为了避免“删除数据时，一定要先删除从表，再删除主表”的情况：
+有两种方法：
+		1、级联删除（在创建外键语句末尾加关键字 on delete cascade）：CONSTRAINT fk_stuinfo_major FOREIGN KEY ( majorid ) REFERENCES stuinfo ( id ) [ON DELETE CASCADED];
+		这样在删除主表信息的时候，从表关联信息也会一起删除
+		2、级联置空：（在创建外键语句末尾加关键字 on delete set null）：CONSTRAINT fk_stuinfo_major FOREIGN KEY ( majorid ) REFERENCES stuinfo ( id ) [ON DELETE SET NULL];
+		这样在删除主表信息的时候，从表关联信息会被设置为null
 
 
 可以同时加入多个约束，用空格隔开即可
@@ -163,7 +171,7 @@ ALTER TABLE stuinfo MODIFY COLUMN age INT;
 ALTER TABLE stuinfo DROP PRIMARY KEY;
 
 -- 4、删除唯一
-ALTER TABLE stuinfo FROM INDEX seat;
+ALTER TABLE stuinfo DROP INDEX seat;
 
 -- 5、删除外键约束
 ALTER TABLE stuinfo DROP FOREIGN KEY majorid;
