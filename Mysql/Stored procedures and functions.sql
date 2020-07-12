@@ -147,7 +147,7 @@ SELECT @bname, @usercp;
 
 
 -- 创建带inout模式的存储过程
-案例6：传入a和b两个值，最终a和b都翻倍并返回
+-- 案例6：传入a和b两个值，最终a和b都翻倍并返回
 DELIMITER $
 CREATE PROCEDURE myp7(INOUT a INT, INOUT b INT)
 BEGIN
